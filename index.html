@@ -1,0 +1,154 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+
+
+	<title> Dilution Calculator</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="dilution calculator" /> 
+	<meta name="description" content="Online dilution calculator" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<script type="text/javascript">
+function dilute()
+{
+    stock = $("#scon").val();
+    sunit = $("#sconunit").val();
+    desire = $("#dcon").val();
+    dunit = $("#dconunit").val();
+    volume = $("#dvol").val();
+    vunit = $("#dvolunit").val();
+    sconval = stock * Math.pow(10,sunit);
+    dconval = desire * Math.pow(10,dunit);
+    volval = volume * Math.pow(10,vunit);
+    if(dconval >= sconval)
+    {
+        alert("Stock concentration must be greater than desired concentration");
+    }
+    else
+    {
+    litre=dconval/sconval * volval;
+    litre=rnd(litre,"litre",4);
+    $("#rvol").val(litre);
+    }
+}
+function rnd(value,unit,n)
+{
+    var fact=Math.pow(10,n)
+    if (value < 1e-9){
+        return( Math.round((value/1e-12)*fact)/fact + "  pico" + unit);
+    } else  if (value < 1e-6) {
+        return( Math.round((value/1e-9)*fact)/fact + "  nano" + unit);
+    } else if (value < 1e-3) {
+        return( Math.round((value/1e-6)*fact)/fact + "  micro" + unit);
+    } else if (value < 1) {
+        return( Math.round((value/1e-3)*fact)/fact + "  milli" + unit);
+    } else {
+        return(Math.round((value)*fact)/fact + " " + unit);
+    } 
+}
+
+</script> 	
+	
+<style>
+  body {
+    background-color: #eee8d5;
+    font-family: Helvetica;
+  }
+  #title {
+    color: #2aa198;
+  }
+  .span4 {
+    background-color: #fdf6e3;
+    margin-top: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #586e75;
+    padding-left: 15px;
+    border-radius: 8px;
+    max-width: 420px;
+  }
+</style>
+</head> 
+<body>
+
+<div class="container">
+
+<div class="row">
+
+  <div class="span4">
+    <h4 id="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dilution Calculator</h4>
+    <table>
+      <tr>
+        <td>$$ C_i $$</td>
+        <td><input class="input-mini form-control" type=text id="scon"></td>
+        <td>
+          <select class="input-medium form-control" id="sconunit">
+            <option value="-15">femtomolar</option>
+            <option value="-12">picomolar</option>
+            <option value="-9">nanomolar</option>
+            <option value="-6">micromolar</option>
+            <option value="-3">millimolar</option>
+            <option value="0">molar</option>
+          </select>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>$$ C_f $$</td>
+        <td><input type=text class="input-mini form-control" id="dcon"></td>
+        <td>
+          <select class="input-medium form-control" id="dconunit">
+            <option value="-15">femtomolar</option>
+            <option value="-12">picomolar</option>
+            <option value="-9">nanomolar</option>
+            <option value="-6">micromolar</option>
+            <option value="-3">millimolar</option>
+            <option value="0">molar</option>
+          </select>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>$$ V_f $$</td>
+        <td><input type=text class="input-mini form-control" id="dvol"></td>
+        <td>
+          <select class="input-medium form-control" id="dvolunit">  
+            <option value="-6">microlitre</option>
+            <option value="-3">millilitre</option>
+            <option value="0">litre</option>
+          </select>
+        </td>
+      </tr>    
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-success" onclick="dilute()">Calcular</button>       
+        </td>
+        
+      </tr>
+    </table>
+    <br>              
+    <table>
+      <tr>
+        <td>$$ V_i $$</td>
+        <td><input type=text class="input-large form-control" id="rvol" readonly></td>
+      </tr>
+    </table>
+
+  </div>
+  
+</div>
+
+</div>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
+
+
